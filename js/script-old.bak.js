@@ -31,26 +31,24 @@ loader
     .on("progress", loadProgressHandler)
     .load(setup);
 
-var dungeon, blurFilter1, explorer, state, treasure, videoSprite, door, id;
+var dungeon, explorer, state, treasure, door, id;
 
 function setup() {
     //attempt to load video:
     var videoTexture = PIXI.Texture.fromVideo('vid/australia_boom_banner_full_lq.mp4');
-    videoSprite = new Sprite(videoTexture);
-    videoSprite.scale.x = 0.45;
-    videoSprite.scale.y = 0.45;
-    console.log(videoSprite);
-    blurFilter1 = new PIXI.filters.BlurFilter();
-    videoSprite.filters = [blurFilter1];
-    //Get shader code as a string
-    var shaderCode = document.getElementById("shader").innerHTML
-        //Create our Pixi filter using our custom shader code
-    var simpleShader = new PIXI.AbstractFilter('', shaderCode);
-    //Apply it to our object
-    videoSprite.filters = [simpleShader];
-
+    var videoSprite = new Sprite(videoTexture);
     scene.addChild(videoSprite);
 
+    //load & resize just an image:
+    var chips = new Sprite(resources.chipImage.texture);
+    chips.position.set(600, 400);
+    chips.width = 450;
+    chips.height = 300;
+    chips.scale.set(0.3, 0.3);
+    //Note: Changing anchor position resets the images position over the anchor (top L corner):
+    chips.anchor.x = 0.5;
+    chips.anchor.y = 0.5;
+    chips.rotation = 0.5;
 
     //game stuff:
     //shorthand the id loader:
@@ -60,13 +58,15 @@ function setup() {
     var rectangle = new PIXI.Rectangle(192, 128, 64, 64);
     var explorerImg = id['explorer.png'];
 
+    //explorerImg.frame = rectangle;
     explorer = new Sprite(explorerImg);
     explorer.position.set(32, 32);
     //velocity vals:
     explorer.vx = 0;
     explorer.vy = 0;
     scene.addChild(explorer);
-
+    scene.addChild(chips);
+    //buttons:
 
     //Capture the keyboard arrow keys
     var left = keyboard(37),
@@ -92,6 +92,7 @@ function setup() {
             explorer.vx = 0;
         }
     };
+
     //Up
     up.press = function() {
         explorer.vy = -5;
@@ -174,21 +175,13 @@ function keyboard(keyCode) {
     return key;
 }
 
-var count = 0;
+
 
 //LOOPS AND STATE:
 function gameLoop() {
 
     //Loop this function at 60 frames per second
     requestAnimationFrame(gameLoop);
-    videoSprite.speed = Math.random() * 0.1;
-
-    count += 0.005;
-
-    var blurAmount = Math.sin(count);
-
-    blurFilter1.blur = 20 * (blurAmount);
-
 
     state();
 
