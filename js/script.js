@@ -68,8 +68,8 @@ function setup() {
     //videoTexture.pause();
     videoTexture.baseTexture.autoPlay = false;
     videoSprite = new Sprite(videoTexture);
-    /*  videoSprite.scale.x = 1;
-      videoSprite.scale.y = 0.45;*/
+    videoSprite.scale.x = 0.5;
+    videoSprite.scale.y = 0.5;
 
     blurFilter1 = new PIXI.filters.BlurFilter();
     matrixFilter = new PIXI.filters.ColorMatrixFilter();
