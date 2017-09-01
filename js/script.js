@@ -55,7 +55,7 @@ loader
     .add("img/wsj_iconography.json")
     .add('gameSprite', 'img/tileset.png')
     .add("chipImage", 'img/BN-UW287_2M3uT_G_20170829105455.jpg')
-    .add('http://online.wsj.com/media/australia_boom_banner_full_lq.mp4')
+    .add('vid/australia_boom_banner_full_lq.mp4')
     .on("progress", loadProgressHandler)
     .load(setup);
 
@@ -63,11 +63,11 @@ var dungeon, videoTexture, blurFilter1, matrixFilter, lightmapTex, videoSprite;
 
 function setup() {
     //attempt to load video:
-    videoTexture = PIXI.Texture.fromVideo('http://online.wsj.com/media/australia_boom_banner_full_lq.mp4');
+    videoTexture = PIXI.Texture.fromVideo('vid/australia_boom_banner_full_lq.mp4');
     console.log(videoTexture.baseTexture);
     //videoTexture.pause();
-    videoTexture.baseTexture.autoPlay = false;
-    videoTexture.baseTexture.source.loop = true;
+    videoTexture.baseTexture.autoPlay = true;
+    videoTexture.baseTexture.source.loop = false;
     videoSprite = new Sprite(videoTexture);
     videoSprite.scale.x = 0.5;
     videoSprite.scale.y = 0.5;
@@ -125,7 +125,6 @@ function gameLoop() {
     count += 0.005;
 
     var blurAmount = Math.sin(count);
-
 
 
 
