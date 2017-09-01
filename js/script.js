@@ -59,11 +59,14 @@ loader
     .on("progress", loadProgressHandler)
     .load(setup);
 
-var dungeon, blurFilter1, matrixFilter, lightmapTex, videoSprite;
+var dungeon, videoTexture, blurFilter1, matrixFilter, lightmapTex, videoSprite;
 
 function setup() {
     //attempt to load video:
-    var videoTexture = PIXI.Texture.fromVideo('vid/australia_boom_banner_full_lq.mp4');
+    videoTexture = PIXI.Texture.fromVideo('vid/australia_boom_banner_full_lq.mp4');
+    console.log(videoTexture.baseTexture);
+    //videoTexture.pause();
+    videoTexture.baseTexture.autoPlay = false;
     videoSprite = new Sprite(videoTexture);
     videoSprite.scale.x = 0.45;
     videoSprite.scale.y = 0.45;
@@ -102,7 +105,9 @@ function setup() {
     gameLoop();
 
 };
-
+document.addEventListener('touchend', function() {
+    videoTexture.baseTexture.source.play();
+}, false)
 var count = 0;
 
 //LOOPS AND STATE:
