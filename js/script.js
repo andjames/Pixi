@@ -88,7 +88,7 @@ function setup() {
     //Create our Pixi filter using our custom shader code
     var simpleShader = new PIXI.AbstractFilter('', shaderCode);
     //Apply it to our object
-    // videoSprite.filters = [simpleShader];
+    videoSprite.filters = [simpleShader];
 
     scene.addChild(videoSprite);
 
