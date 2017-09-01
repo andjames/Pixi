@@ -68,8 +68,8 @@ function setup() {
     //videoTexture.pause();
     videoTexture.baseTexture.autoPlay = false;
     videoSprite = new Sprite(videoTexture);
-    videoSprite.scale.x = 0.45;
-    videoSprite.scale.y = 0.45;
+    /*  videoSprite.scale.x = 1;
+      videoSprite.scale.y = 0.45;*/
 
     blurFilter1 = new PIXI.filters.BlurFilter();
     matrixFilter = new PIXI.filters.ColorMatrixFilter();
@@ -105,9 +105,13 @@ function setup() {
     gameLoop();
 
 };
+//safari play inline canvas video hack
 document.addEventListener('touchend', function() {
     videoTexture.baseTexture.source.play();
 }, false)
+
+
+
 var count = 0;
 
 //LOOPS AND STATE:
