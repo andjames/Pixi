@@ -67,6 +67,7 @@ function setup() {
     console.log(videoTexture.baseTexture);
     //videoTexture.pause();
     videoTexture.baseTexture.autoPlay = false;
+    videoTexture.baseTexture.source.loop = true;
     videoSprite = new Sprite(videoTexture);
     videoSprite.scale.x = 0.5;
     videoSprite.scale.y = 0.5;
